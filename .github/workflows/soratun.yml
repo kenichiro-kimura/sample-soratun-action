@@ -18,4 +18,9 @@ jobs:
       - name: create arc.json
         run: |
           soratun config > arc.json
-          cat arc.json
+          cat arc.json | jq ".privateKey = \"$private_key\" | .publicKey = \"$public_key\" | .simId = \"simid\" | .arcSessionStatus.arcServerPeerPublicKey = \"$public_key\" | .arcSessionStatus.arcSecretEndpoint = \"$endpoint\" | .arcSessionStatus.arcAllowedIPs = \"$allowd_ips\""
+        env:
+          private_key : ${{ secrets.ARC_PRIVATE_KEY }}
+          public_key : ${{ secrets.ARC_PUBLIC_KEY }}
+          endpoint : ${{ secrets.ARC_ENDPOINT }}
+          allowed_ips : ${{ secrets.ARC_ALLOWED_IPS }}
