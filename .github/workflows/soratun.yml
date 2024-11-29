@@ -23,8 +23,8 @@ jobs:
         env:
           private_key : ${{ secrets.ARC_PRIVATE_KEY }}
           public_key : ${{ secrets.ARC_PUBLIC_KEY }}
-          endpoint : ${{ secrets.ARC_ENDPOINT }}
-          allowed_ips : ${{ secrets.ARC_ALLOWED_IPS }}
+          endpoint : ${{ env.ARC_ENDPOINT }}
+          allowed_ips : ${{ env.ARC_ALLOWED_IPS }}
           client_peer_public_key : ${{ secrets.ARC_CLIENT_PEER_PUBLIC_KEY }}
       - name: soratun up
         run: soratun up --config soratun.json
