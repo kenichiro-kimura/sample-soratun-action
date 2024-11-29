@@ -18,9 +18,13 @@ jobs:
       - name: create arc.json
         run: |
           soratun config > arc.json
-          cat arc.json | jq ".privateKey = \"$private_key\" | .publicKey = \"$public_key\" | .simId = \"simid\" | .arcSessionStatus.arcServerPeerPublicKey = \"$public_key\" | .arcSessionStatus.arcSecretEndpoint = \"$endpoint\" | .arcSessionStatus.arcAllowedIPs = \"$allowd_ips\""
+          cat arc.json | jq ".privateKey = \"$private_key\" | .publicKey = \"$client_peer_public_key\" | .simId = \"simid\" | .arcSessionStatus.arcServerPeerPublicKey = \"$public_key\" | .arcSessionStatus.arcSecretEndpoint = \"$endpoint\" | .arcSessionStatus.arcAllowedIPs = \"$allowd_ips\"" > soratun.json
+          cat soratun.json
         env:
           private_key : ${{ secrets.ARC_PRIVATE_KEY }}
           public_key : ${{ secrets.ARC_PUBLIC_KEY }}
           endpoint : ${{ secrets.ARC_ENDPOINT }}
           allowed_ips : ${{ secrets.ARC_ALLOWED_IPS }}
+          client_peer_public_key : ${{ secrets.ARC_CLIENT_PEER_PUBLIC_KEY }}
+      - name: soratun up
+        run: soratun up --config soratun.json
