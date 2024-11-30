@@ -36,5 +36,5 @@ jobs:
       - name: soratun up
         run: |
           soratun up --config soratun.json &
-          sleep 10
+          sleep 30
           ping -c 3 pong.soracom.io
