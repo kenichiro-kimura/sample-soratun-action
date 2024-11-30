@@ -36,4 +36,4 @@ jobs:
       - name: soratun up
         run: soratun up --config soratun.json &
       - name: ping
-          ping -c 3 pong.soracom.io
+        run: ping -c 3 pong.soracom.io
