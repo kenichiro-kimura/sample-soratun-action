@@ -35,5 +35,7 @@ jobs:
           client_peer_public_key : ${{ secrets.ARC_CLIENT_PEER_PUBLIC_KEY }}
       - name: soratun up
         run: soratun up --config soratun.json &
+      - name: wait soratun up
+        run: sleep 10
       - name: ping
-        run: ping -c 3 100.127.100.127
+        run: ping -c 3 poing.soracom.io
