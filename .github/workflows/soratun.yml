@@ -15,6 +15,9 @@ jobs:
     steps:
       - name: create wiregurard config
         run: |
+          apt -y update
+          apt -y install wireguard
+          mkdir /etc/wireguard/
           echo "[Interface]" > /etc/wireguard/wg0.conf
           echo "PrivateKey = $private_key" > /etc/wireguard/wg0.conf
           echo "Address = ${ARC_ADDRESS }/32" > /etc/wireguard/wg0.conf
