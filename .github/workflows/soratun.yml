@@ -38,4 +38,4 @@ jobs:
       - name: wait soratun up
         run: sleep 10
       - name: ping
-        run: ping -c 3 pong.soracom.io
+        run: ping -c 1 pong.soracom.io
