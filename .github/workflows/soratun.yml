@@ -17,6 +17,7 @@ jobs:
         run: |
           apt -y update
           apt -y install jq
+          apt -y install iputils-ping net-tools
           curl -OL https://github.com/soracom/soratun/releases/download/v1.2.7/soratun_1.2.7_linux_amd64.tar.gz
           tar xvfz soratun_1.2.7_linux_amd64.tar.gz
           cp soratun_1.2.7_linux_amd64/soratun /usr/local/bin/
