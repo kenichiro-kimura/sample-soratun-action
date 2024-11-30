@@ -34,8 +34,7 @@ jobs:
           allowed_ips : ${{ vars.ARC_ALLOWED_IPS }}
           client_peer_public_key : ${{ secrets.ARC_CLIENT_PEER_PUBLIC_KEY }}
       - name: soratun up
-        run: soratun up --config soratun.json &
-      - name: wait soratun up
-        run: sleep 10
-      - name: ping
-        run: ping pong.soracom.io
+        run: |
+          soratun up --config soratun.json &
+          sleep 10
+          ping -c 3 pong.soracom.io
