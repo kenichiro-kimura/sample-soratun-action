@@ -1,6 +1,6 @@
 # sample-soratun-action
 
-This is a sample workflow file that connect to SORACOM with [SORACOM Arc](https://soracom.jp/services/arc/) using [soratun])https://github.com/soracom/soratun/).
+This is a sample workflow file that connect to SORACOM with [SORACOM Arc](https://soracom.jp/services/arc/) using [soratun](https://github.com/soracom/soratun/).
 
 # How to use
 
