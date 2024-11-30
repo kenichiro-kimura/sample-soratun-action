@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: node:18
-      options: --privileged
+#      options: --privileged
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: download soratun
