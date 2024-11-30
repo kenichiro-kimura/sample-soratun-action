@@ -17,20 +17,19 @@ jobs:
         run: |
           apt -y update
           apt -y install wireguard
-          mkdir /etc/wireguard/
           echo "[Interface]" > /etc/wireguard/wg0.conf
-          echo "PrivateKey = $private_key" > /etc/wireguard/wg0.conf
-          echo "Address = ${ARC_ADDRESS }/32" > /etc/wireguard/wg0.conf
-          echo "[Peer]" > /etc/wireguard/wg0.conf
-          echo "PublicKey = $public_key > /etc/wireguard/wg0.conf
-          echo "AllowedIPs = 100.127.0.0/21, 100.127.10.0/28, 100.127.10.128/25, 100.127.10.17/32, 100.127.10.18/31, 100.127.10.20/30, 100.127.10.24/29, 100.127.10.32/27, 100.127.10.64/26, 100.127.11.0/24, 100.127.12.0/22, 100.127.128.0/17, 100.127.16.0/20, 100.127.32.0/19, 100.127.64.0/18, 100.127.8.0/23, 54.250.252.67/32" > /etc/wireguard/wg0.conf
-          echo "Endpoint = $endpoint > /etc/wireguard/wg0.conf
+          echo "PrivateKey = $private_key" >> /etc/wireguard/wg0.conf
+          echo "Address = ${ARC_ADDRESS }/32" >> /etc/wireguard/wg0.conf
+          echo "[Peer]" >> /etc/wireguard/wg0.conf
+          echo "PublicKey = $public_key >> /etc/wireguard/wg0.conf
+          echo "AllowedIPs = 100.127.0.0/21, 100.127.10.0/28, 100.127.10.128/25, 100.127.10.17/32, 100.127.10.18/31, 100.127.10.20/30, 100.127.10.24/29, 100.127.10.32/27, 100.127.10.64/26, 100.127.11.0/24, 100.127.12.0/22, 100.127.128.0/17, 100.127.16.0/20, 100.127.32.0/19, 100.127.64.0/18, 100.127.8.0/23, 54.250.252.67/32" >> /etc/wireguard/wg0.conf
+          echo "Endpoint = $endpoint >> /etc/wireguard/wg0.conf
           cat /etc/wireguard/wg0.confn
         env:
-          private_key : ${{ vars.ARC_PRIVATE_KEY }}
-          public_key : ${{ vars.ARC_PUBLIC_KEY }}
-          endpoint : ${{ vars.ARC_ENDPOINT }}
-          address: ${{ vars.ARC_ADDRESS }}
+          private_key : ${{ secrets.ARC_PRIVATE_KEY }}
+          public_key : ${{ secrets.ARC_PUBLIC_KEY }}
+          endpoint : ${{ secrets.ARC_ENDPOINT }}
+          address: ${{ secrets.ARC_ADDRESS }}
       - name: wg0 up
         run: wg-quick up wg0 
       - name: ping
