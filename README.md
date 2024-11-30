@@ -10,7 +10,7 @@ Create reopository secrets belows. See also [documents of soratun](https://users
 - ARC_PRIVATE_KEY : PrivateKey in wireguard.conf
 - ARC_PUBLIC_KEY : PublicKey in '[Peer]' section in wireguard.conf
 - ARC_ENDPOINT : Endpoint in '[Peer]' section in wireguard.conf
-- ARC_CLIENT_PEER_PUBLIC_KEY : Client Peer Public Key (See also [documents)(https://users.soracom.io/ja-jp/docs/arc/check-connection-settings/))
+- ARC_CLIENT_PEER_PUBLIC_KEY : Client Peer Public Key (See also [documents](https://users.soracom.io/ja-jp/docs/arc/check-connection-settings/))
 - ARC_ADDRESS : Address in wireguard.conf, without '/32'.
 
 And also create repository variables.
