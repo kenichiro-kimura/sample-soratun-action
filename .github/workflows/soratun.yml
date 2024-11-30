@@ -13,25 +13,24 @@ jobs:
       options: --privileged
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: download soratun
+      - name: create wiregurard config
         run: |
-          apt -y update
-          apt -y install jq
-          curl -OL https://github.com/soracom/soratun/releases/download/v1.2.7/soratun_1.2.7_linux_amd64.tar.gz
-          tar xvfz soratun_1.2.7_linux_amd64.tar.gz
-          cp soratun_1.2.7_linux_amd64/soratun /usr/local/bin/
-      - name: create arc.json
-        run: |
-          soratun config > arc.json
-          cat arc.json | jq ".privateKey = \"$private_key\" | .publicKey = \"$client_peer_public_key\" | .simId = \"simid\" | .arcSessionStatus.arcServerPeerPublicKey = \"$public_key\" | .arcSessionStatus.arcServerEndpoint = \"$endpoint\" | .arcSessionStatus.arcAllowedIPs = $allowed_ips" > soratun.json
-          cat soratun.json
+          echo "[Interface]" > /etc/wireguard/wg0.conf
+          echo "PrivateKey = $private_key" > /etc/wireguard/wg0.conf
+          echo "Address = ${ARC_ADDRESS }/32" > /etc/wireguard/wg0.conf
+          echo "[Peer]" > /etc/wireguard/wg0.conf
+          echo "PublicKey = $public_key > /etc/wireguard/wg0.conf
+          echo "AllowedIPs = 100.127.0.0/21, 100.127.10.0/28, 100.127.10.128/25, 100.127.10.17/32, 100.127.10.18/31, 100.127.10.20/30, 100.127.10.24/29, 100.127.10.32/27, 100.127.10.64/26, 100.127.11.0/24, 100.127.12.0/22, 100.127.128.0/17, 100.127.16.0/20, 100.127.32.0/19, 100.127.64.0/18, 100.127.8.0/23, 54.250.252.67/32" > /etc/wireguard/wg0.conf
+          echo "Endpoint = $endpoint > /etc/wireguard/wg0.conf
+          cat /etc/wireguard/wg0.confn
         env:
           private_key : ${{ vars.ARC_PRIVATE_KEY }}
           public_key : ${{ vars.ARC_PUBLIC_KEY }}
           endpoint : ${{ vars.ARC_ENDPOINT }}
-          allowed_ips : ${{ vars.ARC_ALLOWED_IPS }}
-          client_peer_public_key : ${{ vars.ARC_CLIENT_PEER_PUBLIC_KEY }}
-      - name: soratun up
-        run: soratun up --config soratun.json
+          address: ${{ vars.ARC_ADDRESS }}
+      - name: wg0 up
+        run: wg-quick up wg0 
       - name: ping
         run: ping -c 3 pong.soracom.io
+      - name: wg0 down
+        run: wg-quick down wg0
